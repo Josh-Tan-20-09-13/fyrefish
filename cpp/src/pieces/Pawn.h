@@ -2,7 +2,7 @@
 #define Pawn_H
 
 #include "IPiece.h"
-#include "Board.h"
+#include "board/Board.h"
 
 class Pawn : public IPiece {
 public:

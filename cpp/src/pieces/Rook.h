@@ -2,7 +2,7 @@
 #define Rook_H
 
 #include "IPiece.h"
-#include "Board.h"
+#include "board/Board.h"
 
 class Rook : public IPiece {
 public:

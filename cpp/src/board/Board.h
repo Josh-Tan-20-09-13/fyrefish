@@ -1,7 +1,7 @@
 #ifndef Board_H
 #define Board_H
 
-#include "IPiece.h"
+#include "pieces/IPiece.h"
 #include <vector>
 #include <memory>
 #include <array>

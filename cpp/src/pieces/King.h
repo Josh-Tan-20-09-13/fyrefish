@@ -2,7 +2,7 @@
 #define King_H
 
 #include "IPiece.h"
-#include "Board.h"
+#include "board/Board.h"
 
 class King : public IPiece {
 public:

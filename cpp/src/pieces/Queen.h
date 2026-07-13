@@ -2,7 +2,7 @@
 #define Queen_H
 
 #include "IPiece.h"
-#include "Board.h"
+#include "board/Board.h"
 
 class Queen : public IPiece {
 public:

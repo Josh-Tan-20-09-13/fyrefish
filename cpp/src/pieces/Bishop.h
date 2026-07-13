@@ -2,7 +2,7 @@
 #define Bishop_H
 
 #include "IPiece.h"
-#include "Board.h"
+#include "board/Board.h"
 
 class Bishop : public IPiece {
 public:

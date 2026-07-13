@@ -2,7 +2,7 @@
 #define Knight_H
 
 #include "IPiece.h"
-#include "Board.h"
+#include "board/Board.h"
 
 class Knight : public IPiece {
 public:
