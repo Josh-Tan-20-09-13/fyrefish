@@ -1,61 +1,49 @@
 #!/usr/bin/env python3
-
-from enum import Enum
+"""board state representation"""
+from dataclasses import dataclass, field
+from typing import Union
+from collections import namedtuple
 
 import numpy as np
-from numpy.typing import ArrayLike
 
-class PieceColor(Enum):
-    WHITE = 1 
-    BLACK = -1
+from aliases import *
 
-class PieceType(Enum):
-    PAWN = 1
-    KNIGHT = 2
-    BISHOP = 3
-    ROOK = 4
-    QUEEN = 5
-    KING = 6
+INITIAL_BOARD = np.array([
+    [4, 2, 3, 5, 6, 3, 2, 4],
+    [1, 1, 1, 1, 1, 1, 1, 1],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [-1, -1, -1, -1, -1, -1, -1, -1],
+    [-4, -2, -3, -5, -6, -3, -2, -4],
+], dtype=np.int8)
 
+@dataclass
+class Coord:
+    """represents coordinate"""
+    row: int
+    col: int
+
+@dataclass
 class Board:
-    
-    def __init__(self) -> None:
-        self.board: np.array = np.zeros([8, 8], dtype=np.int8) 
-    
-    def reset(self) -> None:
-        self.board[1, :] = 1
-        self.board[0, :] = [4, 2, 3, 5, 6, 3, 2, 4]
-        self.board[6] = -1
-        self.board[7] = -1 * self.board[0]
+    """
+    grid: 8x8 array where (0,0) = a1 and (0, 1) = a2
+    """
+    board: np.array = field(default_factory=lambda: INITIAL_BOARD)
 
-    def add_piece(self, row: int, col: int, color: PieceColor, piece_type: PieceType) -> None:
-        self.board[row-1, col-1] = piece_type.value * color.value 
-
-    def remove_piece(self, row: int, col: int) -> None:
-        self.board[row-1, col-1] = 0 
-
-    def is_board_valid(self) -> bool:
-        # check each side has only 1 king
-        if np.count_nonzero(self.board == 5) != 1:
-            return False
-        if np.count_nonzero(self.board == -5) != 1:
-            return False
-
-        # check each side pawns are not on back rank
-        if np.any(self.board[0, :] == 1):
-            return False
-        if np.any(self.board[7, :] == -1):
-            return False
-
-
-def rook_moves(board: Board, row: int, col: int) -> list[tuple[int, int]]:
+@dataclass
+class BoardState:
+    """information needed for unique position"""
+    board: Board = field(default_factory=lambda: Board())
+    castle_ability: np.array = field(default_factory=lambda: np.ones(shape=4, dtype=np.int8))
+    enpassant_file: Union[int, None] = None
+    turn: int = PieceColor['WHITE'].value
 
 
 if __name__ == '__main__':
     b1 = Board()
-    b1.add_piece(row=1, col=2, color=PieceColor['BLACK'], piece_type=PieceType['PAWN'])
-    print(b1.board)
-    b2 = PieceColor(1)
-    b3 = PieceColor['WHITE']
-    print(b2, b2.value)
-    print(b3, b3.value)
+    print(b1)
+
+    print(b1.board.shape)
+    print(INITIAL_BOARD[0, 1])
