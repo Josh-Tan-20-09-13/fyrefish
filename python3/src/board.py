@@ -25,6 +25,10 @@ class Coord:
     row: int
     col: int
 
+    def list(self) -> list[int]:
+        return [self.row, self.col]
+
+
 @dataclass
 class Board:
     """

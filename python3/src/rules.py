@@ -45,11 +45,11 @@ def rook_moves(
             ending_pos=new_coord
         )
 
-        if board.board[*new_coord] < 0:
+        if board.board[*new_coord.list()] < 0:
             my_move.capture=True
             moves.append(my_move)
             break
-        elif board.board[*new_coord] > 0:
+        elif board.board[*new_coord.list()] > 0:
             break
         else:
             moves.append(my_move)
@@ -67,7 +67,7 @@ def rook_moves(
             my_move.capture = True
             moves.append(my_move)
             break
-        elif board.board[*new_coord] > 0:
+        elif board.board[*new_coord.list()] > 0:
             break
         else:
             moves.append(my_move)
@@ -85,7 +85,7 @@ def rook_moves(
             my_move.capture = True
             moves.append(my_move)
             break
-        elif board.board[*new_coord] > 0:
+        elif board.board[*new_coord.list()] > 0:
             break
         else:
             moves.append(my_move)
@@ -99,11 +99,11 @@ def rook_moves(
             ending_pos=new_coord
         )
 
-        if board.board[*new_coord] < 0:
+        if board.board[*new_coord.list()] < 0:
             my_move.capture = True
             moves.append(my_move)
             break
-        elif board.board[*new_coord] > 0:
+        elif board.board[*new_coord.list()] > 0:
             break
         else:
             moves.append(my_move)
